@@ -10,7 +10,7 @@ def add(x, y):
 
 @shared_task
 def change_username(pk):
-    Notification = MediumNotification.objects.filter(id = pk)
+    Notification = MediumNotification.objects.get(pk = pk)
     Notification.username = 'default'
     Notification.save()
 

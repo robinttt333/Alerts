@@ -2,16 +2,16 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
-import os
-import time
+import os, time, socket
 from utils import checkInternetConnectivity
 from django.conf import settings
+from selenium.common.exceptions import TimeoutException
+
 
 config = settings.CONFIG
 class ScraperPersonal:
     
     def __init__(self, website='medium', driver = 'chromeDriver'):
-
         #website specific details
         self.url = config.get(website).get('url')
         self.email = config.get(website).get('email')
@@ -24,16 +24,19 @@ class ScraperPersonal:
         # chromeOptions.add_argument("--headless")
         
         #Chrome driver
-        self.driver = webdriver.Chrome(config.get(driver).get('path'), options = chromeOptions)
-    
+        self.driver =  webdriver.Chrome(config.get(driver).get('path'), options = chromeOptions)
     def addDelay(self,timeInSeconds = 1):
         time.sleep(timeInSeconds)
 
     def login(self):
         if not checkInternetConnectivity():
+            self.driver.quit()
             return
-
-        self.driver.get(self.url)
+        try:
+            self.driver.set_page_load_timeout(20)
+            self.driver.get(self.url)
+        except TimeoutException as e:
+            self.driver.close()
         self.driver.find_element_by_link_text("Sign in").click()
         signInUsingGmailButton = self.driver.find_elements_by_class_name("button-label")
         if len(signInUsingGmailButton) == 0:
@@ -54,7 +57,9 @@ class ScraperPersonal:
 
     def getNotifications(self):
         if not checkInternetConnectivity():
-            return
+            self.driver.quit()
+            return        
         self.login()
         self.addDelay(10)
         self.driver.find_element_by_xpath('//*[@title="Notifications"]').click()
+        self.driver.quit()
