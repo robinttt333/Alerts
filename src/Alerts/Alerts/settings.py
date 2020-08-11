@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import yaml
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -31,7 +32,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CELERY_BEAT_SCHEDULE = {
+    
+    'task-one':{
 
+        'task' : 'medium.tasks.getUserNotifications',
+        'schedule' : timedelta(seconds=20) 
+    }
+}
 # Application definition
 
 INSTALLED_APPS = [
