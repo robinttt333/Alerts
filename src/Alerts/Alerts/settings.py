@@ -32,14 +32,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CELERY_BEAT_SCHEDULE = {
+# CELERY_BEAT_SCHEDULE = {
     
-    'task-one':{
-
-        'task' : 'medium.tasks.getUserNotifications',
-        'schedule' : timedelta(seconds=20) 
-    }
-}
+#     'task-one':{
+#         'task' : 'reddit.tasks.getHot',
+#         'schedule' : timedelta(seconds=300) 
+#     }
+# }
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,7 +51,7 @@ INSTALLED_APPS = [
 
     #my apps
     'medium',
-    'reddit'
+    'reddit',
 ]
 
 MIDDLEWARE = [
