@@ -13,9 +13,15 @@ class RedditBot:
     def crawl(self, subreddit):
         pass
     
-    def hot(self, subreddit = "learnpython", limit=10):
-        
+    def hot(self, subreddit = "learnpython", limit=10):        
         for submission in self.crawler.subreddit(subreddit).hot(limit=limit):
-            print(submission.title)
-            RedditPost(title = submission.title).save()
-        
+            qs = RedditPost.objects.filter(postId = submission.id)
+            if not qs:
+                newPost = RedditPost()
+                newPost.title = submission.title
+                newPost.body = submission.selftext
+                newPost.createdDate = submission.created
+                newPost.url = submission.url
+                newPost.comments = submission.num_comments
+                newPost.postId = submission.id
+                newPost.save()
