@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="list-group">
+	{% for post in linkedInPosts %}
+		{% include 'includes/linkedInPost.html' with post=post %}
+	{% endfor %}
+		
+	</div>
+	
+{% endblock %}

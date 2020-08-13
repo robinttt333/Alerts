@@ -1,0 +1,9 @@
+<!-- {% load humanize %} -->
+<a href="#" class="list-group-item list-group-item-action flex-column align-items-center">
+    <div class="d-flex w-100 justify-content-between">
+     <p class="mb-1">{{ post.body | safe | truncatewords:50}}</p>
+     <span><img src="{{ post.image }}" class = "rounded" alt=""></span>
+    </div>
+ <span class="oi oi-calendar"></span>
+      	{{ post.created }}
+    </span>  </a>

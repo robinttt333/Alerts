@@ -6,4 +6,4 @@ def home(request):
 	qs = RedditPost.objects.all()
 	for post in qs:
 		post.mark()
-	return render(request, "redditPosts.html", {'redditPosts' : qs})
+	return render(request, "home.html", {'redditPosts' : qs})
