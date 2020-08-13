@@ -2,7 +2,8 @@
 {% block content %}
 	<div class="list-group">
 	{% for post in linkedInPosts %}
-		{% include 'includes/linkedInPost.html' with post=post %}
+		{% include 'linkedIn/includes/linkedInPost.html' with post=post %}
+		
 	{% endfor %}
 		
 	</div>

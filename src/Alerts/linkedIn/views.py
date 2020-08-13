@@ -12,4 +12,4 @@ def home(request):
 		posts.append(post)
 		post.read = True
 		post.save()
-	return render(request, 'home.html', {'linkedInPosts': posts})
+	return render(request, 'linkedIn/home.html', {'linkedInPosts': posts})

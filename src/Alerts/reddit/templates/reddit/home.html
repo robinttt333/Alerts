@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
 	{% for post in redditPosts %}
-		{% include 'includes/redditPost.html' with post=post %}
+		{% include 'reddit/includes/redditPost.html' with post=post %}
 	{% endfor %}
 </div>
 {% endblock %}
