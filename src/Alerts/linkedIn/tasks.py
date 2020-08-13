@@ -8,5 +8,7 @@ def getUserNotifications():
 	notifications  = linkedInScraper().getNotifications()
 	
 	for notification in notifications:
-		LinkedInPost(**notification).save()
+		qs = LinkedInPost.objects.filter(url = notification['url'])
+		if not qs:
+			LinkedInPost(**notification).save()
 

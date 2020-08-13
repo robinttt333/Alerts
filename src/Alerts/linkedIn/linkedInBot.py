@@ -67,13 +67,12 @@ class linkedInScraper:
             if img == None:
                 continue
             contentDiv = divs[1]
-            words = contentDiv.findAll(text = True)
-            words = [word for word in words if word not in (' ', '\n')]
-            content = ''.join(map(str,words))
+            a = contentDiv.find('a', recursive = False)
+            content = a.find('span', recursive = False).next_sibling.get_text(strip = True)
 
             date = divs[2].findAll('p')[-1]
             date = date.get_text(strip = True)
-            notifications.append({'image': img['src'], 'body':content, 'created':date})
+            notifications.append({'image': img['src'], 'body':content, 'created':date, 'url': a['href']})
 
         self.driver.quit()
         return notifications

@@ -7,6 +7,8 @@ class LinkedInPost(models.Model):
 	image = models.TextField()
 	body = models.TextField()
 	created = models.TextField()
+	url = models.TextField()
+	read = models.BooleanField(default = False)
 
 	class Meta:
 		ordering = ['created']
@@ -16,3 +18,14 @@ class LinkedInPost(models.Model):
 
 	def mark(self):
 		self.body = markdown.markdown(self.body)
+
+	def markWithoutP(self):
+		p = '<p>'
+		np = '</p>'
+		md = markdown.markdown(self.body)
+		if md.startswith(p) and md.endswith(np): 
+		    md = md[len(p):-len(np)]
+		self.body = md
+		
+	def makeUrl(self):
+		return "https://linkedIn.com" + self.url
