@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     #my apps
     'medium',
     'reddit',
+    'linkedIn',
 ]
 
 MIDDLEWARE = [

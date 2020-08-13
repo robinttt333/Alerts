@@ -11,7 +11,7 @@
       {{ post.comments }} Comments
     </span>
   </div>
-    {{ post.body | linebreaks }}
-    <a href="{{ post.url }}" class="btn btn-primary">Visit Post</a>
+    {{ post.body | safe | urlize }}
+    <a href="{{ post.url }}" class="btn btn-primary" target="blank">Visit Post</a>
   </div>
 </div>

@@ -1,4 +1,5 @@
 from django.db import models
+import markdown 
 
 # Create your models here.
 class RedditPost(models.Model):
@@ -14,3 +15,7 @@ class RedditPost(models.Model):
 
 	def __str__(self):
 		return self.title
+
+
+	def mark(self):
+		self.body = markdown.markdown(self.body)
