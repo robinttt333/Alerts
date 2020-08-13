@@ -9,6 +9,8 @@ class RedditPost(models.Model):
 	url = models.TextField()
 	postId = models.CharField(max_length = 20)
 	
+	class Meta:
+		ordering = ['-createdDate']	
 
 	def __str__(self):
 		return self.title
