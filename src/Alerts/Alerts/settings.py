@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'medium',
     'reddit',
     'linkedIn',
+    'youtube'
 ]
 
 MIDDLEWARE = [

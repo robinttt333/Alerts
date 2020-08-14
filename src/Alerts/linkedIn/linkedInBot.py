@@ -55,7 +55,6 @@ class linkedInScraper:
         soup = BeautifulSoup(html, 'html.parser')
         soup = soup.find('section')
         html = soup.findAll('div', id = re.compile('^ember\d+'), recursive = False)
-        print(len(html))
         for element in html:
             if element.article is None or element.article.div is None:
                 continue

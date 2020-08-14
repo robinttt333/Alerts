@@ -55,6 +55,7 @@ class ScraperPersonal:
         password.send_keys(self.password)
         password.send_keys(Keys.ENTER)
 
+        
     def getNotifications(self):
         if not checkInternetConnectivity():
             self.driver.quit()
