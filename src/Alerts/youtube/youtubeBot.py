@@ -20,9 +20,8 @@ class youtubeScraper:
 
         #chrome specific details
         chromeOptions = Options()
-        chromeOptions.add_argument("--disable-extensions")
-        chromeOptions.add_argument("--disable-gpu")
-        # chromeOptions.add_argument("--headless")
+        chromeOptions.add_argument('--no-sandbox')
+        chromeOptions.add_argument("--headless")
 
         #Chrome driver
         self.driver =  webdriver.Chrome(config.get('chromeDriver').get('path'), options = chromeOptions)
@@ -32,9 +31,12 @@ class youtubeScraper:
 
     def alternateLogin(self, website = 'stackoverflow'):
         self.driver.get(self.alternateUrl)
+        self.addDelay(10)
         self.driver.find_element_by_link_text("Log in").click()
+        self.addDelay(10)
         self.driver.find_element_by_xpath('//*[@id="openid-buttons"]/button[1]').click()
-        email = self.driver.find_element_by_name("identifier")
+        self.addDelay(10)
+        email = self.driver.find_element_by_tag_name("input")
         email.send_keys(self.email)
         email.send_keys(Keys.ENTER)
         self.addDelay(4)
@@ -43,13 +45,13 @@ class youtubeScraper:
         password.send_keys(Keys.ENTER)
         self.addDelay(10)
 
-        
     def login(self):
         if not checkInternetConnectivity():
             return
+        self.addDelay(10)
         self.alternateLogin()
-        # self.driver.get(self.url)
-        # self.addDelay(10)
+        self.driver.get(self.url)
+        self.addDelay(10)
 
     def getNotifications(self):
         if not checkInternetConnectivity():

@@ -21,7 +21,7 @@ class linkedInScraper:
         chromeOptions = Options()
         chromeOptions.add_argument("--disable-extensions")
         chromeOptions.add_argument("--disable-gpu")
-        # chromeOptions.add_argument("--headless")
+        chromeOptions.add_argument("--headless")
 
         #Chrome driver
         self.driver =  webdriver.Chrome(config.get(driver).get('path'), options = chromeOptions)
@@ -64,14 +64,20 @@ class linkedInScraper:
             imageDiv = divs[0]
             img = imageDiv.find('img')
             if img == None:
-                continue
+                img = imageDiv.find('div',{'class': 'EntityPhoto-circle-4-ghost-person'})
+                if img == None:
+                    continue
+                else :
+                    img = ""
+            else :
+                img = img['src']
             contentDiv = divs[1]
             a = contentDiv.find('a', recursive = False)
             content = a.find('span', recursive = False).next_sibling.get_text(strip = True)
 
             date = divs[2].findAll('p')[-1]
             date = date.get_text(strip = True)
-            notifications.append({'image': img['src'], 'body':content, 'created':date, 'url': a['href']})
+            notifications.append({'image': img, 'body':content, 'created':date, 'url': a['href']})
 
         self.driver.quit()
         return notifications
