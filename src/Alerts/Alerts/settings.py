@@ -32,13 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# CELERY_BEAT_SCHEDULE = {
-    
-#     'task-one':{
-#         'task' : 'reddit.tasks.getHot',
-#         'schedule' : timedelta(seconds=300) 
-#     }
-# }
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,7 +48,10 @@ INSTALLED_APPS = [
     'medium',
     'reddit',
     'linkedIn',
-    'youtube'
+    'youtube',
+
+    #3rd party
+    'django_celery_beat'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +133,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+CELERY_TIMEZONE = 'Asia/Kolkata'
+CELERY_BEAT_SCHEDULE = {
+    
+    'reddit':{
+        'task' : 'reddit.tasks.getHot',
+        'schedule' : timedelta(seconds=300) 
+    },
+    'medium':{
+        'task' : 'medium.tasks.getUserNotifications',
+        'schedule' : timedelta(seconds=300) 
+    },
+    'youtube':{
+        'task' : 'youtube.tasks.getUserNotifications',
+        'schedule' : timedelta(seconds=300) 
+    },
+    'linkedIn':{
+        'task' : 'linkedIn.tasks.getUserNotifications',
+        'schedule' : timedelta(seconds=300) 
+    },
+
+}
