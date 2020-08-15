@@ -2,6 +2,7 @@ import praw
 from django.conf import settings
 config = settings.CONFIG
 from .models import RedditPost
+from prawcore import NotFound
 
 class RedditBot:
     def __init__(self):
@@ -25,3 +26,11 @@ class RedditBot:
                 newPost.comments = submission.num_comments
                 newPost.postId = submission.id
                 newPost.save()
+    
+    def checkSubreddit(self, subreddit):
+        exists = True
+        try:
+            self.crawler.subreddits.search_by_name(subreddit, exact=True)
+        except NotFound:
+            exists = False
+        return exists

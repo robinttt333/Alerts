@@ -1,9 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
-	{% for post in redditPosts %}
+{% if messages %}
+		    
+		    	{% for message in messages %}
+				<div class="alert alert-success alert-dismissible fade show col-md-10 message" role="alert">
+				{{ message }}	
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+		    {% endfor %}
+	{% endif %}
+<div class="row ">
+	<div class="col-md-10">
+		{% for post in redditPosts %}
 		{% include 'reddit/includes/redditPost.html' with post=post %}
 	{% endfor %}
+	</div>
+	<div class="col-md-2 popular-tags">
+		<h4>Subreddits</h4>
+		{% for subreddit in subreddits %}
+			<a href=""><span class="label label-default">{{ subreddit }}</span></a>
+		{% endfor %}
+		<form action="{% url 'reddit:new' %}" class="new-subreddit-form" method="POST">
+			{% csrf_token %}
+		  	<div class="form-group">
+		    <label for="newSubreddit">Enter a new Subreddit Name</label>
+		    <input type="text" class="form-control form-control-sm" id="newSubreddit" placeholder="Enter Subreddit" name="subreddit">
+		  </div>
+		    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+
+  		</form>
+	</div>
 </div>
 {% endblock %}

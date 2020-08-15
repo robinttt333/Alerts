@@ -8,3 +8,7 @@ from .redditBot import RedditBot
 def getHot():
 	RedditBot().hot()
 
+@shared_task
+def checkExistance(subreddit):
+	RedditBot().checkSubreddit(subreddit)
+

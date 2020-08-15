@@ -9,6 +9,7 @@ class RedditPost(models.Model):
 	createdDate = models.DateField(auto_now_add = True)
 	url = models.TextField()
 	postId = models.CharField(max_length = 20)
+	subreddit = models.CharField(max_length = 50)
 	
 	class Meta:
 		ordering = ['-createdDate']	
