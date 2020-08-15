@@ -1,30 +1,33 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 import os, time, socket, re
 from selenium.common.exceptions import TimeoutException
 from django.conf import settings
 from utils import checkInternetConnectivity
 
+
 config = settings.CONFIG
 
 class youtubeScraper:
 
-    def __init__(self, website='youtube', driver = 'chromeDriver'):
+    def __init__(self, website='youtube', driver = 'geckoDriver'):
         #website specific details
         self.url = config.get(website).get('url')
         self.alternateUrl = config.get(website).get('alternateUrl')
         self.email = config.get(website).get('email')
         self.password = config.get(website).get('password')
 
-        #chrome specific details
-        chromeOptions = Options()
-        chromeOptions.add_argument('--no-sandbox')
-        #chromeOptions.add_argument("--headless")
+        #firefox specific details
+        options = Options()
+        options.add_argument("--headless")
+        # options.add_argument('--no-sandbox')
+        options.binary_location = "/usr/bin/firefox"
 
-        #Chrome driver
-        self.driver =  webdriver.Chrome(config.get('chromeDriver').get('path'), options = chromeOptions)
+
+        #Firefox driver
+        self.driver =  webdriver.Firefox(executable_path = config.get(driver).get('path'), firefox_options = options)
 
     def addDelay(self,timeInSeconds = 1):
         time.sleep(timeInSeconds)
@@ -35,7 +38,8 @@ class youtubeScraper:
         self.addDelay(5)
         self.driver.find_element_by_xpath('//*[@id="openid-buttons"]/button[1]').click()
         self.addDelay(5)
-        email = self.driver.find_element_by_tag_name("input")
+        email = self.driver.find_element_by_xpath('//*[@id="identifierId"]')
+        print(email.get_attribute('innerHTML'))
         email.send_keys(self.email)
         email.send_keys(Keys.ENTER)
         self.addDelay(4)

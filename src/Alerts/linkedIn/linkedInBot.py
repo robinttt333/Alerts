@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 import os, time, socket, re
 from utils import checkInternetConnectivity
@@ -11,20 +11,22 @@ config = settings.CONFIG
 
 class linkedInScraper:
 
-    def __init__(self, website='linkedIn', driver = 'chromeDriver'):
+    def __init__(self, website='linkedIn', driver = 'geckoDriver'):
         #website specific details
         self.url = config.get(website).get('url')
         self.email = config.get(website).get('email')
         self.password = config.get(website).get('password')
 
-        #chrome specific details
-        chromeOptions = Options()
-        chromeOptions.add_argument("--disable-extensions")
-        chromeOptions.add_argument("--disable-gpu")
-        chromeOptions.add_argument("--headless")
 
-        #Chrome driver
-        self.driver =  webdriver.Chrome(config.get(driver).get('path'), options = chromeOptions)
+        #firefox specific details
+        options = Options()
+        options.add_argument("--headless")
+        # options.add_argument('--no-sandbox')
+        options.binary_location = "/usr/bin/firefox"
+
+
+        #Firefox driver
+        self.driver =  webdriver.Firefox(executable_path = config.get(driver).get('path'), firefox_options = options)
 
     def addDelay(self,timeInSeconds = 1):
         time.sleep(timeInSeconds)

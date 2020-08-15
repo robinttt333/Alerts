@@ -9,6 +9,8 @@ def getUserNotifications():
 	notifications  = youtubeScraper().getNotifications()
 	
 	for notification in notifications:
-		YoutubeNotification(**notification).save()
+		qs = YoutubeNotification.objects.filter(videoLink = notification.videoLink)
+		if not qs:
+			YoutubeNotification(**notification).save()
 	
 
