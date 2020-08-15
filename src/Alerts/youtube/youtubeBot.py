@@ -21,7 +21,7 @@ class youtubeScraper:
         #chrome specific details
         chromeOptions = Options()
         chromeOptions.add_argument('--no-sandbox')
-        chromeOptions.add_argument("--headless")
+        #chromeOptions.add_argument("--headless")
 
         #Chrome driver
         self.driver =  webdriver.Chrome(config.get('chromeDriver').get('path'), options = chromeOptions)
@@ -31,11 +31,10 @@ class youtubeScraper:
 
     def alternateLogin(self, website = 'stackoverflow'):
         self.driver.get(self.alternateUrl)
-        self.addDelay(10)
         self.driver.find_element_by_link_text("Log in").click()
-        self.addDelay(10)
+        self.addDelay(5)
         self.driver.find_element_by_xpath('//*[@id="openid-buttons"]/button[1]').click()
-        self.addDelay(10)
+        self.addDelay(5)
         email = self.driver.find_element_by_tag_name("input")
         email.send_keys(self.email)
         email.send_keys(Keys.ENTER)
@@ -48,10 +47,9 @@ class youtubeScraper:
     def login(self):
         if not checkInternetConnectivity():
             return
-        self.addDelay(10)
         self.alternateLogin()
         self.driver.get(self.url)
-        self.addDelay(10)
+        self.addDelay(5)
 
     def getNotifications(self):
         if not checkInternetConnectivity():
@@ -59,13 +57,16 @@ class youtubeScraper:
             
         self.login()
         self.driver.find_element_by_class_name("ytd-notification-topbar-button-renderer").click()
-        self.addDelay(10)
+        self.addDelay(5)
         htmlElements = self.driver.find_elements_by_tag_name("ytd-notification-renderer")
+        notifications = []
 
         for html in htmlElements:
+            self.driver.execute_script("arguments[0].scrollIntoView();", html)
+            html = html.get_attribute('innerHTML')
             soup = BeautifulSoup(html, 'html.parser')
             a = soup.find('a')
-
+            videoLink = a['href']
             newDiv = a.find("div", {"id" : "new"})
             read = False
             if newDiv is None:
@@ -75,7 +76,15 @@ class youtubeScraper:
             time = a.find("div", {"class" :"text"}).find("div", {"class" : "metadata"}).findAll("yt-formatted-string",recursive = False)[-1].get_text()
             text = a.find("div", {"class" :"text"}).find("yt-formatted-string").get_text()
             thumbnail = a.find("div",{"class": "thumbnail-container"}).find("img")['src']
+            notifications.append({
 
-            print(image,time,text,thumbnail)
+                'videoLink': videoLink,
+                'read': read,
+                'image': image,
+                'time': time,
+                'description': text,
+                'thumbnail': thumbnail
 
+            })
         self.driver.quit()
+        return notifications
