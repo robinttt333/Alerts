@@ -1,5 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.conf import settings
 
 def home(request):
-	return render(request,'base.html',{})
+	return redirect(reverse('reddit:home'))
