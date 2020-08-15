@@ -16,5 +16,6 @@ def change_username(pk):
 
 @shared_task
 def getUserNotifications():
-	ScraperPersonal().getNotifications()
-
+	notifications = ScraperPersonal().getNotifications()
+	for notification in notifications:
+		MediumNotification(**notification).save()

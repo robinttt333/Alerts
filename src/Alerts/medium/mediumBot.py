@@ -38,6 +38,7 @@ class ScraperPersonal:
         except TimeoutException as e:
             self.driver.close()
         self.driver.find_element_by_link_text("Sign in").click()
+        self.addDelay(5)
         signInUsingGmailButton = self.driver.find_elements_by_class_name("button-label")
         if len(signInUsingGmailButton) == 0:
             signInUsingGmailButton = self.driver.find_element_by_link_text("Sign in with Google")
@@ -45,6 +46,7 @@ class ScraperPersonal:
             signInUsingGmailButton = signInUsingGmailButton[0]
         
         signInUsingGmailButton.click()
+        self.addDelay(5)
         email = self.driver.find_element_by_name("identifier")
         email.send_keys(self.email)
         email.send_keys(Keys.ENTER)
@@ -63,4 +65,26 @@ class ScraperPersonal:
         self.login()
         self.addDelay(10)
         self.driver.find_element_by_xpath('//*[@title="Notifications"]').click()
+        self.addDelay(5)
+
+        notifications = self.driver.find_element_by_class_name("notificationsList").find_elements_by_tag_name('li')
+        notificationsList = []
+        for li in notifications:
+            self.driver.execute_script("arguments[0].scrollIntoView();", li)
+            html = li.get_attribute('innerHTML')
+            html = BeautifulSoup(html, 'html.parser')
+            image = html.find('img', {'class' : 'avatar-image'})
+            if image == None:
+                break
+            else :
+                image = image['src']
+            text = html.find('a', {'class': 'notificationsList-button'}).findAll(text=True)
+            date = text.pop()
+            text = "".join(text)
+            notificationsList.append({
+                'description' : text,
+                'image': image,
+                'date' : date
+                })
         self.driver.quit()
+        return notificationsList
