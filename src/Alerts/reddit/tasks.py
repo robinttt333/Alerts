@@ -10,5 +10,4 @@ def getHot():
 
 @shared_task
 def checkExistance(subreddit):
-	RedditBot().checkSubreddit(subreddit)
-
+	exists = RedditBot().checkSubreddit(subreddit)

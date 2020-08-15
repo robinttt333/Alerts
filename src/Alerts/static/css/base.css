@@ -11,9 +11,7 @@
 .popular-tags a:hover, .tags a:hover {
   text-decoration: none;
 }
-a {
-    color: #a0a0a0;
-}
+
 .label-default{
   background: #777;
 }

@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 {% if messages %}
-		    
-		    	{% for message in messages %}
-				<div class="alert alert-success alert-dismissible fade show col-md-10 message" role="alert">
-				{{ message }}	
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				    <span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
-		    {% endfor %}
-	{% endif %}
+	{% for message in messages %}
+		<div class="alert alert-success alert-dismissible fade show col-md-10 message" role="alert">
+			{{ message | safe}}	
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+    {% endfor %}
+{% endif %}
+
 <div class="row ">
 	<div class="col-md-10">
 		{% for post in redditPosts %}

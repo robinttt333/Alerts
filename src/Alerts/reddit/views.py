@@ -18,5 +18,5 @@ def home(request):
 def new(request):
 	subreddit = request.POST.get('subreddit')
 	checkExistance.delay(subreddit)
-	messages.add_message(request, messages.SUCCESS, 'Your request is under process...If the subreddit exists, it shall be added')
+	messages.add_message(request, messages.SUCCESS, r'Your request is under process...If the <b>%s</b> exists, it shall be added'%subreddit)
 	return redirect(reverse('reddit:home'))
