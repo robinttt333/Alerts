@@ -25,7 +25,6 @@ class RedditBot:
                 newPost.url = submission.url
                 newPost.comments = submission.num_comments
                 newPost.postId = submission.id
-                newPost.subreddit = subreddit
                 newPost.save()
     
     def checkSubreddit(self, subreddit):

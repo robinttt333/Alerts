@@ -5,9 +5,11 @@ from reddit.models import RedditPost
 from .redditBot import RedditBot
 
 @shared_task
-def getHot():
-	RedditBot().hot()
+def getHot(subreddit = 'learnpython'):
+	RedditBot().hot(subreddit)
 
 @shared_task
 def checkExistance(subreddit):
 	exists = RedditBot().checkSubreddit(subreddit)
+	if exists:
+		getHot.delay(subreddit)

@@ -6,10 +6,10 @@ from .redditBot import RedditBot
 from .tasks import checkExistance
 from django.contrib import messages
 
-subreddits = RedditPost.objects.values('subreddit').distinct()
-subreddits = [ subreddit['subreddit'] for subreddit in subreddits ]
 
 def home(request):
+	subreddits = RedditPost.objects.values('subreddit').distinct()
+	subreddits = [ subreddit['subreddit'] for subreddit in subreddits ]
 	qs = RedditPost.objects.all()
 	for post in qs:
 		post.mark()
@@ -18,5 +18,5 @@ def home(request):
 def new(request):
 	subreddit = request.POST.get('subreddit')
 	checkExistance.delay(subreddit)
-	messages.add_message(request, messages.SUCCESS, r'Your request is under process...If the <b>%s</b> exists, it shall be added'%subreddit)
+	messages.add_message(request, messages.SUCCESS, r'Your request is under process...If the subreddit <b>%s</b> exists, it shall be added'%subreddit)
 	return redirect(reverse('reddit:home'))
