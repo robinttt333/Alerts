@@ -16,11 +16,11 @@ def home(request, subreddit = None):
 	qs = RedditPost.objects.filter(subreddit = subreddit)
 	for post in qs:
 		post.mark()
-	return render(request, "reddit/home.html", {'redditPosts' : qs, 'subreddits': subreddits})
+	return render(request, "reddit/home.html", {'redditPosts' : qs, 'subreddits': subreddits, 'subreddit' : subreddit})
 
 def new(request):
 	subreddit = request.POST.get('subreddit')
-	curr = request.POST.get('url').split('/')[-2]
+	curr = request.POST.get('current').strip()
 	checkExistance.delay(subreddit)
 	messages.add_message(request, messages.SUCCESS, r'Your request is under process...If the subreddit <b>%s</b> exists, it shall be added'%subreddit)
 	return redirect(reverse('reddit:home', kwargs={'subreddit': curr}))

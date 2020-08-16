@@ -11,7 +11,7 @@
       {{ post.comments }} Comments
     </span>
   </div>
-    {{ post.body | safe | urlize }}
+    {{ post.body | safe }}
     <a href="{{ post.url }}" class="btn btn-primary" target="blank">Visit Post</a>
   </div>
 </div>

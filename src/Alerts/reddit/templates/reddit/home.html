@@ -20,8 +20,8 @@
 	</div>
 	<div class="col-md-2 popular-tags">
 		<h4>Subreddits</h4>
-		{% for subreddit in subreddits %}
-			<a href="{% url 'reddit:home' subreddit %}"><span class="label label-default">{{ subreddit }}</span></a>
+		{% for sub in subreddits %}
+			<a href="{% url 'reddit:home' sub %}"><span class="label label-default {% if sub == subreddit %} active-sub {% endif %}" >{{ sub }}</span></a>
 		{% endfor %}
 		<form action="{% url 'reddit:new' %}" class="new-subreddit-form" method="POST">
 			{% csrf_token %}
@@ -29,7 +29,7 @@
 		    <label for="newSubreddit">Enter a new Subreddit Name</label>
 		    <input type="text" class="form-control form-control-sm" id="newSubreddit" placeholder="Enter Subreddit" name="subreddit">
 		    
-		  	<input type="hidden" name="url" value="{{ request.path }} ">
+		  	<input type="hidden" name="current" value="{{ subreddit }} ">
 		  </div>
 		    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
 
