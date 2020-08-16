@@ -14,10 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import home, new
+from .views import home, new, remove
 
 urlpatterns = [
     path('new/', new, name='new'),
+    path('remove/', remove, name='remove'),
     path('', home, name='home'),
     path('<str:subreddit>/', home, name='home'),
 ]
