@@ -12,4 +12,6 @@ def getHot(subreddit = 'learnpython'):
 def checkExistance(subreddit):
 	exists = RedditBot().checkSubreddit(subreddit)
 	if exists:
-		getHot.delay(subreddit)
+		qs = RedditPost.objects.filter(subreddit = subreddit)
+		if not qs:
+			getHot.delay(subreddit)

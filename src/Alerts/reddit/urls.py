@@ -17,7 +17,8 @@ from django.urls import path
 from .views import home, new
 
 urlpatterns = [
-    path('', home, name='home'),
     path('new/', new, name='new'),
+    path('', home, name='home'),
+    path('<str:subreddit>/', home, name='home'),
 ]
 app_name = 'reddit'
