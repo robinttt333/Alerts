@@ -22,8 +22,10 @@ def new(request):
 	subreddit = request.POST.get('subreddit')
 	if RedditPost.objects.values('subreddit').distinct().count() == LIMIT:
 		return redirect(reverse('reddit:remove'))
-
 	curr = request.POST.get('current').strip()
+	if RedditPost.objects.filter(subreddit = subreddit):
+		messages.error(request, r'The subreddit <b>%s</b> already exists'%subreddit)
+		return redirect(reverse('reddit:home', kwargs={'subreddit': curr}))
 	checkExistance.delay(subreddit)
 	messages.add_message(request, messages.SUCCESS, r'Your request is under process...If the subreddit <b>%s</b> exists, it shall be added'%subreddit)
 	return redirect(reverse('reddit:home', kwargs={'subreddit': curr}))

@@ -1,11 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+	<link rel="stylesheet" type = "text/css" href="{% static 'youtube/css/youtube.css' %}">
+{% endblock %}
 
 {% block content %}
 	
-	<div class="list-group">
 		{% for notification in youtubeNotifications %}
 			{% include 'youtube/includes/youtubeNotification.html' with notification=notification %}
 		{% endfor %}
-	</div>
+	
 
 {% endblock %}
