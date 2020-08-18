@@ -20,17 +20,17 @@ body{
 }
 
 .label {
-    display: inline;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .new-subreddit-form{
@@ -38,7 +38,7 @@ body{
   margin-top: 10px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 
-    
+  
 
 }
 
@@ -56,18 +56,18 @@ body{
 
 
 .label-pending{
-    display: inline;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: #a83e32;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  background: #a83e32;
 }
 .remove-subreddit-button{
   position: relative;
@@ -79,4 +79,19 @@ body{
 .empty-page{
   margin-top: 100px;
   text-align: center;
+}
+
+.search-results{
+  padding: 10px;
+}
+.no-result{
+  text-align: center;
+  color: grey;
+}
+
+.reddit-button {
+  width: 100px;
+  position: relative;
+  top: -10px;
+  left: 20px;
 }

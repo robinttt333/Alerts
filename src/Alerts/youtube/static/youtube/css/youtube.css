@@ -53,6 +53,8 @@
 .video-link{
 	display: block;
 	text-align: center;
+	position: relative;
+	left: -15px;
 }
 
 

@@ -5,6 +5,8 @@ from .models import RedditPost, Pending
 from .redditBot import RedditBot
 from .tasks import checkExistance
 from django.contrib import messages
+from django.views.decorators.http import require_http_methods
+
 
 def getDistinctSubreddits():
 	return RedditPost.objects.order_by('subreddit').values_list('subreddit', flat = True).distinct()
@@ -17,10 +19,9 @@ def home(request, subreddit = None):
 	subreddits = getDistinctSubreddits()
 
 	qs = RedditPost.objects.filter(subreddit = subreddit)
-	for post in qs:
-		post.mark()
 	return render(request, "reddit/home.html", {'redditPosts' : qs, 'subreddits': subreddits, 'subreddit' : subreddit, 'pending' : Pending.objects.all()})
 
+@require_http_methods(['POST'])
 def new(request):
 	subreddit = request.POST.get('subreddit')
 	curr = request.POST.get('current').strip()

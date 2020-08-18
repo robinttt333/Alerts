@@ -51,9 +51,13 @@
 		<hr>
 		<!-- Pending requests section -->
 		<h4 id="pending-requests">Pending Requests</h4>
-		{% for sub in pending %}
-		<span class="label-pending" >{{ sub }}</span>
-		{% endfor %}
+		{% if not pending %}
+			<small><i>None</i></small>
+		{% else %}
+			{% for sub in pending %}
+			<span class="label-pending" >{{ sub }}</span>
+			{% endfor %}
+		{% endif %}
 	</div>
 </div>
 {% endif %}

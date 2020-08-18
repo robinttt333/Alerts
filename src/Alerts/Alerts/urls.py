@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import home
+from .views import home, search
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home),
+    path('search',search),
     path('medium/', include('medium.urls')),    
     path('youtube/', include('youtube.urls')),    
     path('reddit/', include('reddit.urls')),    

@@ -11,7 +11,8 @@
       {{ post.comments }} Comments
     </span>
   </div>
-    {{ post.body | safe }}
-    <a href="{{ post.url }}" class="btn btn-primary" target="blank">Visit Post</a>
+    {{ post.mark | safe | truncatewords:50 }}
   </div>
+  <a href="{{ post.url }}" class="btn btn-primary btn-md reddit-button" target="blank">Visit Post</a>
+
 </div>
