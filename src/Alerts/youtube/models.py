@@ -5,7 +5,7 @@ class YoutubeNotification(models.Model):
 	videoLink = models.TextField()
 	read = models.BooleanField()
 	image = models.TextField()
-	time = models.TextField()
+	time = models.DateTimeField()
 	description = models.TextField()
 	thumbnail = models.TextField()
 

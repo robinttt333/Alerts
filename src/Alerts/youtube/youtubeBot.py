@@ -80,6 +80,7 @@ class youtubeScraper:
             time = a.find("div", {"class" :"text"}).find("div", {"class" : "metadata"}).findAll("yt-formatted-string",recursive = False)[-1].get_text()
             text = a.find("div", {"class" :"text"}).find("yt-formatted-string").get_text()
             thumbnail = a.find("div",{"class": "thumbnail-container"}).find("img")['src']
+            print(time)
             notifications.append({
 
                 'videoLink': videoLink,

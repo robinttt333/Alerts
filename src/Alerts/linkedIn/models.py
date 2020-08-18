@@ -6,12 +6,12 @@ import markdown
 class LinkedInPost(models.Model):
 	image = models.TextField()
 	body = models.TextField()
-	created = models.TextField()
+	created = models.DateTimeField()
 	url = models.TextField()
 	read = models.BooleanField(default = False)
 
 	class Meta:
-		ordering = ['created']
+		ordering = ['-created']
 
 	def __str__(self):
 		return self.body[:50]

@@ -4,7 +4,7 @@ from django.db import models
 class MediumNotification(models.Model):
 	description = models.TextField()
 	image = models.TextField()
-	date = models.TextField()
+	date = models.DateTimeField()
 
 	class Meta:
 		ordering = ['-date']
