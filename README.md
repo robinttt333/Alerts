@@ -59,8 +59,12 @@ python manage.py runserver
 ```sh
 celery -A Alerts worker -l info
 ```
+You should see something like this
+![celery worker](https://github.com/robinttt333/Alerts/blob/master/Screenshot%20from%202020-08-18%2018-31-29.png)
 8. Lastly open up a third terminal instance and type in
 ```sh
 celery -A proj beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
+![celery beat](https://github.com/robinttt333/Alerts/blob/master/Screenshot%20from%202020-08-18%2018-33-00.png)
+
 
