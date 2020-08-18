@@ -1,5 +1,5 @@
 <a href="{{ notification.getVideoLink }}" class="video-link">
-	<div class="youtube-notification">
+	<div class="youtube-notification {% if not notification.getAndUpdateReadStatus %} active_ {% endif %}">
 	<div class="content">
 		<div class="channel-logo-container">
 			<img src="{{ notification.image }}" class = "channel-logo" alt="">

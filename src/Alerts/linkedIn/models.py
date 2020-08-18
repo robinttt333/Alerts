@@ -17,7 +17,7 @@ class LinkedInPost(models.Model):
 		return self.body[:50]
 
 	def mark(self):
-		self.body = markdown.markdown(self.body)
+		return markdown.markdown(self.body)
 
 	def markWithoutP(self):
 		p = '<p>'
@@ -25,7 +25,13 @@ class LinkedInPost(models.Model):
 		md = markdown.markdown(self.body)
 		if md.startswith(p) and md.endswith(np): 
 		    md = md[len(p):-len(np)]
-		self.body = md
+		return md
 		
 	def makeUrl(self):
 		return "https://linkedIn.com" + self.url
+
+	def getAndUpdateReadStatus(self):
+		curr = self.read
+		self.read = True
+		self.save()
+		return curr

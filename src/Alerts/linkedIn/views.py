@@ -6,10 +6,4 @@ from .models import LinkedInPost
 def home(request):
 	# getUserNotifications.delay()
 	qs = LinkedInPost.objects.all()
-	posts = []
-	for post in qs:
-		post.markWithoutP()
-		posts.append(post)
-		post.read = True
-		post.save()
-	return render(request, 'linkedIn/home.html', {'linkedInPosts': posts})
+	return render(request, 'linkedIn/home.html', {'linkedInPosts': qs})

@@ -17,3 +17,9 @@ class YoutubeNotification(models.Model):
 
 	def getVideoLink(self):
 		return "https://youtube.com/" + self.videoLink
+	
+	def getAndUpdateReadStatus(self):
+		curr = self.read
+		self.read = True
+		self.save()
+		return curr
