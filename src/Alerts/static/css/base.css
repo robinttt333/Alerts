@@ -50,3 +50,28 @@ body{
 .active-sub{
   background: #007bff;
 }
+#pending-requests{
+  margin-top: 5px;
+}
+
+
+.label-pending{
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background: #a83e32;
+}
+.remove-subreddit-button{
+  position: relative;
+  top: -31px;
+  right: -80px;
+  color: 
+}

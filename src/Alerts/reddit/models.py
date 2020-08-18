@@ -20,3 +20,9 @@ class RedditPost(models.Model):
 
 	def mark(self):
 		self.body = markdown.markdown(self.body)
+
+class Pending(models.Model):
+	subreddit = models.TextField()
+
+	def __str__(self):
+		return self.subreddit

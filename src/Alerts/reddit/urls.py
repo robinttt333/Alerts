@@ -17,8 +17,9 @@ from django.urls import path
 from .views import home, new, remove
 
 urlpatterns = [
-    path('new/', new, name='new'),
     path('remove/', remove, name='remove'),
+    path('new/', new, name='new'),
+    #both urls needed as homepage without a subreddit redirects to 'learnpython' subreddit
     path('', home, name='home'),
     path('<str:subreddit>/', home, name='home'),
 ]

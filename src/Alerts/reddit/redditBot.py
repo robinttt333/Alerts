@@ -27,7 +27,7 @@ class RedditBot:
                 newPost.postId = submission.id
                 newPost.subreddit = subreddit
                 newPost.save()
-    
+        
     def checkSubreddit(self, subreddit):
         exists = True
         try:

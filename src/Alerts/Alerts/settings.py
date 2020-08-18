@@ -14,6 +14,7 @@ from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
 import yaml
+from celery.schedules import crontab
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -143,19 +144,19 @@ CELERY_BEAT_SCHEDULE = {
     
     'reddit':{
         'task' : 'reddit.tasks.getHot',
-        'schedule' : timedelta(seconds=300) 
+        'schedule' : timedelta(hours=3) 
     },
     'medium':{
         'task' : 'medium.tasks.getUserNotifications',
-        'schedule' : timedelta(seconds=300) 
+        'schedule' : timedelta(hours=5) 
     },
     'youtube':{
         'task' : 'youtube.tasks.getUserNotifications',
-        'schedule' : timedelta(seconds=300) 
+        'schedule' : timedelta(seconds=3) 
     },
     'linkedIn':{
         'task' : 'linkedIn.tasks.getUserNotifications',
-        'schedule' : timedelta(seconds=300) 
+        'schedule' : timedelta(seconds=3) 
     },
 
 }
