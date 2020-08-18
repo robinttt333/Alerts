@@ -1,6 +1,6 @@
 {% load humanize %}
 <a href="{{ post.makeUrl }}" target="blank" class="list-group-item list-group-item-action flex-column align-items-center
-{% if not post.getAndUpdateReadStatus %}active{% endif %}"
+{% if not post.getAndUpdateReadStatus %}unread{% endif %}"
 >
     <div class="d-flex w-100 justify-content-between">
      <p class="mb-1" style="margin-right: 20px;">{{ post.markWithoutP | truncatewords:50}}</p>

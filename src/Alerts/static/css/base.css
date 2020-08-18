@@ -95,3 +95,7 @@ body{
   top: -10px;
   left: 20px;
 }
+
+.unread{
+  border-color: #007bff !important;
+}
