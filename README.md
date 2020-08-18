@@ -1,7 +1,7 @@
 # Alerts
 
 Alerts is a django based web application that scrarpes your notifications from sites like Youtube, Linkedin, Medium and Reddit.
-
+![Alerts home page](https://github.com/robinttt333/Alerts/blob/master/Screenshot%20from%202020-08-18%2017-47-34.png)
 ## Getting Started
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
