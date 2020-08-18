@@ -67,4 +67,29 @@ celery -A proj beat -l info --scheduler django_celery_beat.schedulers:DatabaseSc
 ```
 ![celery beat](https://github.com/robinttt333/Alerts/blob/master/Screenshot%20from%202020-08-18%2018-33-00.png)
 
+9.In **settings.py** you will have 
+```python 
+CELERY_TIMEZONE = 'Asia/Kolkata'
+CELERY_BEAT_SCHEDULE = {
+    
+    'reddit':{
+        'task' : 'reddit.tasks.getHot',
+        'schedule' : timedelta(hours=3) 
+    },
+    'medium':{
+        'task' : 'medium.tasks.getUserNotifications',
+        'schedule' : timedelta(hours=5) 
+    },
+    'youtube':{
+        'task' : 'youtube.tasks.getUserNotifications',
+        'schedule' : timedelta(hours=3) 
+    },
+    'linkedIn':{
+        'task' : 'linkedIn.tasks.getUserNotifications',
+        'schedule' : timedelta(hours=3) 
+    },
+}
+```
+Change these according to your preferences, however running the script in very short intervals may lead to issues like *You may be a robot*.
+
 
