@@ -3,7 +3,7 @@
 {% if not post.getAndUpdateReadStatus %}active{% endif %}"
 >
     <div class="d-flex w-100 justify-content-between">
-     <p class="mb-1" style="margin-right: 20px;">{{ post.markWithoutP | safe | truncatewords:50}}</p>
+     <p class="mb-1" style="margin-right: 20px;">{{ post.markWithoutP | truncatewords:50}}</p>
      <span><img src="{{ post.image }}" class = "rounded" alt=""></span>
     </div>
  <span class="oi oi-calendar"></span>
