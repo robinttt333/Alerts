@@ -90,6 +90,6 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 ```
-Change these according to your preferences, however running the script in very short intervals may lead to issues like *You may be a robot*.
+Change these according to your preferences, however running the script in very short intervals may enable the server to block you or pop up a captcha to verify that you are a human.
 
 
